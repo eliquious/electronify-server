@@ -2,6 +2,17 @@
 
 Fermion is a lightweight tool which starts then loads local web servers in an Electron shell.
 
+#### Installation
+
+```
+npm install --save fermion
+```
+
+## How does it work?
+
+When the electron app loads, `fermion` will start a child process with the command you gave it in the configuration. This command is assumed to be a web server but it doesn't have to be. If the child process was started successfully, the window will open and load the url to your server.
+
+
 ## Example
 
 ```js
@@ -29,21 +40,38 @@ fermion({
   // setup logging on child process
   childProcess.stdout.on('data', console.log);
   childProcess.stderr.on('data', console.log);
-  
+
 }).on('child-closed', function(app, stderr, stdout) {
   // the child process has finished
-  
+
 }).on('child-error', function(err, app) {
   // close electron if the child crashes
   app.quit();
 });
 ```
 
-## How does it work?
+## Configuration Options
 
-When the electron app loads, `fermion` will start a child process with the command you gave it in the configuration. This command is assumed to be a web server but it doesn't have to be. If the child process was started successfully, the window will open and load the url to your server.
+* `url [String]`: URL to load after child process starts
+* `command [String]`: command to start child process
+* `options [Object]`: options for [exec][2]
+* `debug [Boolean]`: enables debug output
+* `showDevTools [Boolean]`: shows dev tools on startup
+* `window [Object]`: BrowserWindow configuration
+* `ready [Function]`: called when the application is ready
+    * `app [Object]`: Electron application
+* `preLoad [Function]`: called after the window is created but before the url is loaded
+    * `app [Object]`: Electron application
+    * `window [Object]`: Electron BrowserWindow
+* `postLoad [Function]`: called after the url has finished loading
+    * `app [Object]`: Electron application
+    * `window [Object]`: Electron BrowserWindow
 
-## Configuration
+#### Relavant documentation
+
+* [Node Child Process](https://nodejs.org/api/child_process.html#child_process_class_childprocess)
+* [Election Application](https://github.com/atom/electron/blob/master/docs/api/app.md)
+* [Election BrowserWindow](https://github.com/atom/electron/blob/master/docs/api/browser-window.md#new-browserwindowoptions)
 
 ## Events
 
@@ -63,3 +91,4 @@ Fermion also returns an EventEmitter which emits several events for the child pr
     * `app`: Electron application
 
 [1]: https://nodejs.org/api/child_process.html#child_process_class_childprocess "child process"
+[2]: https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback "child_process.exec"
