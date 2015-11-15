@@ -17,7 +17,10 @@ When the Electron app loads, `electronify-server` will start a child process wit
 ```js
 var electronify = require('electronify-server');
 
-electronify({url: 'https://google.com'});
+electronify({
+  url: 'https://google.com',
+  noServer: true
+});
 ```
 
 ## Long Example
