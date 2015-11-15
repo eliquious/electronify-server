@@ -30,7 +30,7 @@ var electronify = require('electronify-server');
 
 electronify({
   command: 'python -m SimpleHTTPServer',
-  url: 'https://127.0.0.1:8000',
+  url: 'http://127.0.0.1:8000',
   debug: true,
   window: {height: 768, width: 1024},
   ready: function(app){
@@ -48,8 +48,8 @@ electronify({
   console.log('PID: ' + child.pid);
 
   // setup logging on child process
-  childProcess.stdout.on('data', console.log);
-  childProcess.stderr.on('data', console.log);
+  child.stdout.on('data', console.log);
+  child.stderr.on('data', console.log);
 
 }).on('child-closed', function(app, stderr, stdout) {
   // the child process has finished
