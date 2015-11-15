@@ -1,0 +1,27 @@
+{
+  "name": "fermion",
+  "version": "0.1.0",
+  "description": "Fermion is a tool which presents local web servers in an Electron shell.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eliquious/fermion"
+  },
+  "keywords": [
+    "electron",
+    "desktop",
+    "atom"
+  ],
+  "author": "Max Franks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eliquious/fermion/issues"
+  },
+  "homepage": "https://github.com/eliquious/fermion",
+  "dependencies": {
+    "child-process-promise": "^1.1.0"
+  }
+}
