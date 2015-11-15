@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/eliquious/fermion",
   "dependencies": {
-    "child-process-promise": "^1.1.0"
+    "child-process-promise": "^1.1.0",
+    "colors": "^1.1.2"
   }
 }
