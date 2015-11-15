@@ -21,7 +21,7 @@ var DEBUG = function(text) {
   console.log('['.grey + time.green + ']'.grey + colors.reset(' ' + text));
 };
 
-function Fermion(cfg) {
+function electronify(cfg) {
   var self = this;
 
   // Initialize necessary properties from `EventEmitter` in this instance
@@ -44,8 +44,13 @@ function Fermion(cfg) {
     debug('App ready.');
     if (cfg.ready) cfg.ready(app);
 
+    // The app will start with no command if the noServer option is true.
+    if (cfg.noServer) {
+      start(cfg, app, null, debug);
+      return
+
     // The app will quit if there is no command to run.
-    if (!cfg.command) {
+    } else if (!cfg.noServer && !cfg.command) {
       debug('No command configured!');
       self.emit('error', new Error('Empty command!'), app);
       return
@@ -70,48 +75,52 @@ function Fermion(cfg) {
         debug('Command started. [PID: ' + childProcess.pid + ']');
         self.emit('child-started', childProcess);
 
-        app.on('quit', function() {
-          if(!childProcess.killed) childProcess.kill();
-        });
-
-        // setup window config
-        var browserConfig =  cfg.window || DEFAULT_WINDOW ;
-        browserConfig.show = false;
-
-        // create window
-        var window = new BrowserWindow(browserConfig);
-
-        // call pre load handler
-        // menus could be created in this function
-        // window and app event handlers could also be added here
-        if (cfg.preLoad) cfg.preLoad(app, window);
-
-        // load url
-        window.loadUrl(cfg.url);
-        window.show();
-
-        window.webContents.on('did-finish-load', function() {
-          debug('Finished loading.');
-
-          // call post load handler
-          if (cfg.postLoad) cfg.postLoad(app, window);
-        });
-
-        // Clean resource
-        window.on('closed', function() {
-          debug('Window closed.');
-          window = null;
-        });
-
-        // Enable dev tools
-        if (cfg.showDevTools) window.openDevTools();
+        start(cfg, app, childProcess, debug);
       });
   });
 }
 
 // Inherit functions from `EventEmitter`'s prototype
-util.inherits(Fermion, EventEmitter);
+util.inherits(electronify, EventEmitter);
 
 module.exports = function(cfg) {
-  return new Fermion(cfg);
+  return new electronify(cfg);
 };
+
+function start(cfg, app, childProcess, debug) {
+  app.on('quit', function() {
+    if(childProcess && !childProcess.killed) childProcess.kill();
+  });
+
+  // setup window config
+  var browserConfig =  cfg.window || DEFAULT_WINDOW ;
+  browserConfig.show = false;
+
+  // create window
+  var window = new BrowserWindow(browserConfig);
+
+  // call pre load handler
+  // menus could be created in this function
+  // window and app event handlers could also be added here
+  if (cfg.preLoad) cfg.preLoad(app, window);
+
+  // load url
+  window.loadUrl(cfg.url);
+  window.show();
+
+  window.webContents.on('did-finish-load', function() {
+    debug('Finished loading.');
+
+    // call post load handler
+    if (cfg.postLoad) cfg.postLoad(app, window);
+  });
+
+  // Clean resource
+  window.on('closed', function() {
+    debug('Window closed.');
+    window = null;
+  });
+
+  // Enable dev tools
+  if (cfg.showDevTools) window.openDevTools();
+}

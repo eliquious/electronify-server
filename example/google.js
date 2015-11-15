@@ -2,8 +2,9 @@ var fermion = require('../index');
 
 fermion({
   url: 'https://google.com',
+  command: '',
   debug: true,
-  command: 'sleep 1',
+  noServer: true,
   window: {height: 768, width: 1024},
   ready: function(app){},
   preLoad: function(app, window){},

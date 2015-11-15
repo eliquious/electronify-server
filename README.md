@@ -1,24 +1,31 @@
-# fermion
+# electionify-server
 
-Fermion is a lightweight tool which starts then loads local web servers in an Electron shell.
+`electronify-server` is a lightweight tool which starts a local web server and opens a url in an Electron shell.
 
 #### Installation
 
 ```
-npm install --save fermion
+npm install --save electronify-server
 ```
 
 ## How does it work?
 
-When the electron app loads, `fermion` will start a child process with the command you gave it in the configuration. This command is assumed to be a web server but it doesn't have to be. If the child process was started successfully, the window will open and load the url to your server.
+When the Electron app loads, `electronify-server` will start a child process with the command you gave it in the configuration. This command is assumed to be a web server (but it doesn't have to be). If the child process was started successfully, the window will open and load the url to your server.
 
-
-## Example
+## Short Example
 
 ```js
-var fermion = require('fermion');
+var electronify = require('electronify-server');
 
-fermion({
+electronify({url: 'https://google.com'});
+```
+
+## Long Example
+
+```js
+var electronify = require('electronify-server');
+
+electronify({
   command: 'python -m SimpleHTTPServer',
   url: 'https://127.0.0.1:8000',
   debug: true,
@@ -56,6 +63,7 @@ fermion({
 * `command [String]`: command to start child process
 * `options [Object]`: options for [exec][2]
 * `debug [Boolean]`: enables debug output
+* `noServer [Boolean]`: allows urls to load without starting a child process
 * `showDevTools [Boolean]`: shows dev tools on startup
 * `window [Object]`: BrowserWindow configuration
 * `ready [Function]`: called when the application is ready
