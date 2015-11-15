@@ -63,7 +63,7 @@ function Fermion(cfg) {
       })
       .fail(function (err) {
         debug(err);
-        self.emit('error', err);
+        self.emit('child-error', err, app);
         // app.quit();
       })
       .progress(function (childProcess) {
@@ -79,32 +79,32 @@ function Fermion(cfg) {
         browserConfig.show = false;
 
         // create window
-        var mainWindow = new BrowserWindow(browserConfig);
+        var window = new BrowserWindow(browserConfig);
 
         // call pre load handler
         // menus could be created in this function
         // window and app event handlers could also be added here
-        if (cfg.preLoad) cfg.preLoad(app, mainWindow);
+        if (cfg.preLoad) cfg.preLoad(app, window);
 
         // load url
-        mainWindow.loadUrl(cfg.url);
-        mainWindow.show();
+        window.loadUrl(cfg.url);
+        window.show();
 
-        // call post load handler
-        if (cfg.postLoad) cfg.postLoad(app, mainWindow);
-
-        mainWindow.webContents.on('did-finish-load', function() {
+        window.webContents.on('did-finish-load', function() {
           debug('Finished loading.');
+
+          // call post load handler
+          if (cfg.postLoad) cfg.postLoad(app, window);
         });
 
         // Clean resource
-        mainWindow.on('closed', function() {
+        window.on('closed', function() {
           debug('Window closed.');
-          mainWindow = null;
+          window = null;
         });
 
         // Enable dev tools
-        if (cfg.devTools) mainWindow.openDevTools();
+        if (cfg.showDevTools) window.openDevTools();
       });
   });
 }
