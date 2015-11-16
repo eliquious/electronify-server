@@ -98,7 +98,7 @@ electronify({
     * `app [Object]`: Electron application
     * `window [Object]`: Electron BrowserWindow
 
-#### Relavant documentation
+#### Relevant documentation
 
 * [Node Child Process](https://nodejs.org/api/child_process.html#child_process_class_childprocess)
 * [Election Application](https://github.com/atom/electron/blob/master/docs/api/app.md)
