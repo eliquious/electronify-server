@@ -1,6 +1,6 @@
 {
   "name": "electronify-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "electronify-server is a tool which presents local web servers in an Electron shell.",
   "main": "index.js",
   "scripts": {
