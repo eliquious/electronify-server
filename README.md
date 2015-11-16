@@ -12,7 +12,27 @@ npm install --save electronify-server
 
 When the Electron app loads, `electronify-server` will start a child process with the command you gave it in the configuration. This command is assumed to be a web server (but it doesn't have to be). If the child process was started successfully, the window will open and load the url to your server.
 
-## Short Example
+## Examples
+
+There are a couple examples included in the repo. In order to run the examples, you need to have electron installed. If you do not have it installed, perhaps the simplest way is to use `electron-prebuilt` like so:
+
+```
+npm install -g electron-prebuilt
+```
+
+To run the examples, simply go into each example folder and run:
+
+```
+electron .
+```
+
+The `static` example has a dependency that will need to be installed first via:
+
+```
+npm install
+```
+
+### Short Example
 
 ```js
 var electronify = require('electronify-server');
@@ -23,7 +43,7 @@ electronify({
 });
 ```
 
-## Long Example
+### Long Example
 
 ```js
 var electronify = require('electronify-server');
