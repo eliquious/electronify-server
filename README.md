@@ -86,7 +86,7 @@ electronify({
 
 ## Events
 
-Fermion also returns an EventEmitter which emits several events for the child process. This allows you to do additional work when the child process starts, exits or fails unexpectantly.
+`electronify` also returns an EventEmitter which emits several events for the child process. This allows you to do additional work when the child process starts, exits or fails unexpectantly.
 
 * `child-started`: Emitted immediately on successful start of child process
     * `process`: The [child process][1] that was started
@@ -97,7 +97,7 @@ Fermion also returns an EventEmitter which emits several events for the child pr
 * `child-error`: Emitted when the child process fails.
     * `err`: Error returned from executing child process.
     * `app`: Electron application
-* `error`: Fermion configuration error
+* `error`: Configuration error
     * `err`: Configuration error
     * `app`: Electron application
 
