@@ -106,13 +106,14 @@ function start(cfg, app, childProcess, debug) {
 
   // load url
   window.loadUrl(cfg.url);
-  window.show();
 
   window.webContents.on('did-finish-load', function() {
     debug('Finished loading.');
 
     // call post load handler
     if (cfg.postLoad) cfg.postLoad(app, window);
+
+    window.show();
   });
 
   // Clean resource
