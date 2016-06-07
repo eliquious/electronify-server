@@ -1,18 +1,16 @@
 'use strict';
 
 /* eslint no-path-concat: 0, func-names:0 */
-// require('electron-debug')();
-// require('crash-reporter').start();
-// const crashReporter = require('electron').crashReporter;
 
 // Imports
-var app = require('app');
+const electron = require('electron');
+const {app} = electron;
+const {BrowserWindow} = electron;
+
 var util = require('util');
 var colors = require('colors');
 var EventEmitter = require('events');
-var BrowserWindow = require('browser-window');
 var exec = require('child-process-promise').exec;
-// var dialog = require('electron').dialog;
 
 var DEFAULT_WINDOW = { width: 1024, height: 728, show: false };
 var NOOP = function(){};
@@ -105,7 +103,7 @@ function start(cfg, app, childProcess, debug) {
   if (cfg.preLoad) cfg.preLoad(app, window);
 
   // load url
-  window.loadUrl(cfg.url);
+  window.loadURL(cfg.url);
 
   window.webContents.on('did-finish-load', function() {
     debug('Finished loading.');
@@ -114,6 +112,10 @@ function start(cfg, app, childProcess, debug) {
     if (cfg.postLoad) cfg.postLoad(app, window);
 
     window.show();
+  });
+
+  window.webContents.on('did-fail-load', function() {
+      console.log(arguments);
   });
 
   // Clean resource
