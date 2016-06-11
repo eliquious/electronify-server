@@ -1,7 +1,9 @@
 var electronify = require('../../index');
 
 electronify({
-  command: 'node server.js',
+  command: 'node',
+  args: ['server.js'],
+  options: {},
   url: 'http://127.0.0.1:8080',
   debug: true,
   window: {height: 768, width: 1024, 'title-bar-style': 'default', frame: true},

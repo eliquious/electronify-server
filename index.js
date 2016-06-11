@@ -55,7 +55,9 @@ function electronify(cfg) {
     }
 
     // start child process
-    spawn(cfg.command, cfg.options)
+    var args = cfg.args? cfg.args : [];
+    var opts = cfg.options? cfg.options: {};
+    spawn(cfg.command, args, opts)
       .then(function (result) {
         debug('Command completed.');
 

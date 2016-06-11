@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/eliquious/electronify-server",
   "dependencies": {
-    "child-process-promise": "^1.1.0",
+    "child-process-promise": "^2.0.2",
     "colors": "^1.1.2"
   }
 }
