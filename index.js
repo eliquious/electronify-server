@@ -10,7 +10,7 @@ const {BrowserWindow} = electron;
 var util = require('util');
 var colors = require('colors');
 var EventEmitter = require('events');
-var exec = require('child-process-promise').exec;
+var spawn = require('child-process-promise').spawn;
 
 var DEFAULT_WINDOW = { width: 1024, height: 728, show: false };
 var NOOP = function(){};
@@ -55,7 +55,7 @@ function electronify(cfg) {
     }
 
     // start child process
-    exec(cfg.command, cfg.options)
+    spawn(cfg.command, cfg.options)
       .then(function (result) {
         debug('Command completed.');
 
