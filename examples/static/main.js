@@ -1,4 +1,5 @@
 var electronify = require('../../index');
+var retries = 3;
 
 electronify({
   command: 'node',
@@ -13,7 +14,26 @@ electronify({
   preLoad: function(app, window){
     // window event listeners could be added here
   },
-  postLoad: function(app, window){
+  postLoad: function(app, window, error){
+    // Error only exists if there was an error while loading
+    // error == {
+    //   event: event,
+    //   errorCode: errorCode,
+    //   errorDescription: errorDescription,
+    //   validatedURL: validatedURL,
+    //   isMainFrame: isMainFrame
+    // }
+    if (error) {
+      console.log(errorCode, errorDescription, validatedURL);
+      if (retries != 0) {
+        setTimeout(function() {
+          window.loadURL(this.url)
+          retries--
+        }, 1000);
+      }
+      return;
+    }
+
     // url finished loading
   },
   showDevTools: false
