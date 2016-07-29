@@ -117,6 +117,8 @@ function start(cfg, app, childProcess, debug) {
   });
 
   window.webContents.on('did-fail-load', function(event, errorCode, errorDescription, validatedURL, isMainFrame) {
+    debug('Loading failed.');
+
     var error = {
       event: event,
       errorCode: errorCode,
@@ -124,6 +126,7 @@ function start(cfg, app, childProcess, debug) {
       validatedURL: validatedURL,
       isMainFrame: isMainFrame
     }
+
     if (cfg.postLoad) cfg.postLoad(app, window, error);
   });
 

@@ -1,5 +1,4 @@
 var electronify = require('../../index');
-var retries = 3;
 
 electronify({
   command: 'node',
@@ -24,14 +23,7 @@ electronify({
     //   isMainFrame: isMainFrame
     // }
     if (error) {
-      console.log(errorCode, errorDescription, validatedURL);
-      if (retries != 0) {
-        setTimeout(function() {
-          window.loadURL(this.url)
-          retries--
-        }, 1000);
-      }
-      return;
+      console.log(error.errorCode, error.errorDescription, error.validatedURL);
     }
 
     // url finished loading
