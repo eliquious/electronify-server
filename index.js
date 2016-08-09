@@ -116,8 +116,18 @@ function start(cfg, app, childProcess, debug) {
     window.show();
   });
 
-  window.webContents.on('did-fail-load', function() {
-      console.log(arguments);
+  window.webContents.on('did-fail-load', function(event, errorCode, errorDescription, validatedURL, isMainFrame) {
+    debug('Loading failed.');
+
+    var error = {
+      event: event,
+      errorCode: errorCode,
+      errorDescription: errorDescription,
+      validatedURL: validatedURL,
+      isMainFrame: isMainFrame
+    }
+
+    if (cfg.postLoad) cfg.postLoad(app, window, error);
   });
 
   // Clean resource

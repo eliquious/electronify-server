@@ -13,7 +13,19 @@ electronify({
   preLoad: function(app, window){
     // window event listeners could be added here
   },
-  postLoad: function(app, window){
+  postLoad: function(app, window, error){
+    // Error only exists if there was an error while loading
+    // error == {
+    //   event: event,
+    //   errorCode: errorCode,
+    //   errorDescription: errorDescription,
+    //   validatedURL: validatedURL,
+    //   isMainFrame: isMainFrame
+    // }
+    if (error) {
+      console.log(error.errorCode, error.errorDescription, error.validatedURL);
+    }
+
     // url finished loading
   },
   showDevTools: false
