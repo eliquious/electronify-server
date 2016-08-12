@@ -104,8 +104,15 @@ function start(cfg, app, childProcess, debug) {
   // window and app event handlers could also be added here
   if (cfg.preLoad) cfg.preLoad(app, window);
 
-  // load url
-  window.loadURL(cfg.url);
+  // health check to verify server started
+  if (cfg.healthCheck) {
+    cfg.healthCheck(app, window, function() {
+      window.loadURL(cfg.url);
+    })
+  } else {
+    // load url
+    window.loadURL(cfg.url);
+  }
 
   window.webContents.on('did-finish-load', function() {
     debug('Finished loading.');
