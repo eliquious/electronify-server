@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "node-static": "^0.7.7",
+    "electronify-server": "^0.5.1"
+  }
+}

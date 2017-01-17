@@ -1,4 +1,4 @@
-var electronify = require('../../index');
+var electronify = require('electronify-server');
 
 electronify({
   url: 'https://google.com',
