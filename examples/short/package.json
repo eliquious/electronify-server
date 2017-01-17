@@ -4,7 +4,7 @@
   "main": "google.js",
   "devDependencies": {
     "electron-builder": "^7.9.0",
-    "electron-packager": "^8.0.0",
+    "electron-packager": "^8.5.0"
   },
   "dependencies": {
     "electronify-server": "^0.1.4"
