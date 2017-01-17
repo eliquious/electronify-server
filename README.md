@@ -1,4 +1,4 @@
-# electionify-server
+# electronify-server
 
 `electronify-server` is a lightweight tool which starts a local web server and opens a url in an Electron shell.
 
@@ -101,8 +101,8 @@ electronify({
 #### Relevant documentation
 
 * [Node Child Process](https://nodejs.org/api/child_process.html#child_process_class_childprocess)
-* [Election Application](https://github.com/atom/electron/blob/master/docs/api/app.md)
-* [Election BrowserWindow](https://github.com/atom/electron/blob/master/docs/api/browser-window.md#new-browserwindowoptions)
+* [Electron Application](https://github.com/atom/electron/blob/master/docs/api/app.md)
+* [Electron BrowserWindow](https://github.com/atom/electron/blob/master/docs/api/browser-window.md#new-browserwindowoptions)
 
 ## Events
 
